@@ -1,11 +1,7 @@
 let users = {}
-let apple = rand_point()
-
-function rand_point() {
-  return {
-    x: Math.random(),
-    y: Math.random()
-  }
+let apple = {
+  x: 30,
+  y: 30
 }
 
 module.exports = io => {
@@ -15,7 +11,7 @@ module.exports = io => {
 
     // update the snake
     socket.on('user', snake => users[socket.id].snake = snake)
-    socket.on('update apple', _ => apple = rand_point())
+    socket.on('update apple', point => apple = point)
 
     // send data to client to update UI
     setInterval(_ => io.emit('pong', {
